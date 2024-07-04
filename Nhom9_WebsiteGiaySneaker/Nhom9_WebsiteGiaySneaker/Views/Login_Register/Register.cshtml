@@ -1,0 +1,165 @@
+﻿@model Nhom9_WebsiteGiaySneaker.Models.UserModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link rel="stylesheet" href="/Assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/Assets/css/animate.css">
+
+    <link rel="stylesheet" href="/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/Assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/Assets/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/Assets/css/aos.css">
+
+    <link rel="stylesheet" href="/Assets/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/Assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/Assets/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="/Assets/css/icomoon.css">
+    <link rel="stylesheet" href="/Assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#register-form').submit(function (e) {
+                e.preventDefault(); // Ngăn chặn sự kiện submit mặc định
+
+                // Lấy dữ liệu đăng ký từ form
+                var username = $('#username').val();
+                var password = $('#password').val();
+
+                // Gửi yêu cầu Ajax đến Action xử lý đăng ký
+                $.ajax({
+                    url: '/Login_Register/Register', // Đường dẫn đến Action xử lý đăng ký
+                    type: 'POST',
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function (response) {
+                        // Xử lý kết quả trả về từ yêu cầu Ajax
+                        // Chuyển hướng đến trang đăng nhập hoặc trang bán giày
+
+                        $('#successMessage').text('Đăng Ký thành công!');
+
+                        window.location.href = "~/Login";
+                    },
+                    error: function () {
+                        // Xử lý lỗi (nếu có)
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="container" id="successMessage">
+        <h2 class="center">Đăng ký</h2>
+        @using (Html.BeginForm("Register", "Login_Register", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @*<div class="form-group">
+                @Html.LabelFor(m => m.MaKH)
+                @Html.TextBoxFor(m => m.MaKH, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.MaKH)
+                </span>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.HoTen)
+                @Html.TextBoxFor(m => m.HoTen, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.HoTen)
+                </span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.NgaySinh)
+                @Html.TextBoxFor(m => m.NgaySinh, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.NgaySinh)
+                </span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.GioiTinh)
+                @Html.TextBoxFor(m => m.GioiTinh, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.GioiTinh)
+                </span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DienThoai)
+                @Html.TextBoxFor(m => m.DienThoai, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.DienThoai)
+                </span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.TaiKhoan)
+                @Html.TextBoxFor(m => m.TaiKhoan, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.TaiKhoan)
+                </span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.MatKhau)
+                @Html.PasswordFor(m => m.MatKhau, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.MatKhau)
+                </span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.Email)
+                </span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DiaChi)
+                @Html.TextBoxFor(m => m.DiaChi, new { @class = "form-control" })
+                <span style="color:red;font-weight:bold">
+                    @Html.ValidationMessageFor(m => m.DiaChi)
+                </span>
+            </div>
+
+            <div class="center">
+                <div class="form-group">
+                    <input type="submit" value="Đăng ký" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+
+
+

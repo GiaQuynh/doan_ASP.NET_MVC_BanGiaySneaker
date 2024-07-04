@@ -1,0 +1,125 @@
+﻿@model Nhom9_WebsiteGiaySneaker.Models.DangNhap
+@using System.Web.Optimization;
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<style>
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .error-message {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+<meta name="viewport" content="width=device-width" />
+<title>Register</title>
+
+@Styles.Render("~/Content/css")
+
+@Scripts.Render("~/bundles/jquery")
+
+<link rel="stylesheet" href="/Assets/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="/Assets/css/animate.css">
+
+<link rel="stylesheet" href="/Assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/Assets/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="/Assets/css/magnific-popup.css">
+
+<link rel="stylesheet" href="/Assets/css/aos.css">
+
+<link rel="stylesheet" href="/Assets/css/ionicons.min.css">
+
+<link rel="stylesheet" href="/Assets/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/Assets/css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="/Assets/css/flaticon.css">
+<link rel="stylesheet" href="/Assets/css/icomoon.css">
+<link rel="stylesheet" href="/Assets/css/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#loginForm').submit(function (event) {
+            event.preventDefault(); // Ngăn chặn sự kiện submit mặc định
+
+            // Lấy dữ liệu từ các trường đầu vào
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+            // Gửi yêu cầu Ajax tới máy chủ
+            $.ajax({
+                url: '~/Login_Register/Login', // Đường dẫn đến xử lý đăng nhập trên máy chủ
+                method: 'POST',
+                data: {
+                    username: username,
+                    password: password
+                },
+                success: function (response) {
+                    // Xử lý phản hồi từ máy chủ sau khi đăng nhập thành công
+
+                    $('#successMessage').text('Đăng nhập thành công!');
+
+
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi nếu có
+                }
+            });
+        });
+    });
+</script>
+<script>
+    function redirectToRegister() {
+        window.location.href = "Register";
+    }
+</script>
+<br /><br /><br />
+<h2 class="center">Sign In</h2>
+<div class="center form-group">
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+
+    @using (Html.BeginForm("Login", "Login_Register", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.TaiKhoan)
+            @Html.TextBoxFor(m => m.TaiKhoan, new { @class = "form-control" })
+            <span class="error-message">
+                @Html.ValidationMessageFor(m => m.TaiKhoan)
+            </span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MatKhau)
+            @Html.PasswordFor(m => m.MatKhau, new { @class = "form-control" })
+            <span class="error-message">
+                @Html.ValidationMessageFor(m => m.MatKhau)
+            </span>
+        </div>
+        <div class="center">
+            <div class="form-group">
+                <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <input type="button" onclick="redirectToRegister()" value="Đăng ký" class="btn btn-secondary">
+            </div>
+        </div>
+
+    }
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.13/jquery.validate.unobtrusive.min.js"></script>
+}

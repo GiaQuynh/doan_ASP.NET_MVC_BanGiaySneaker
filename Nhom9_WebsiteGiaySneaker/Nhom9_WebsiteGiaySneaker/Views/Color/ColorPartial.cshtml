@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Nhom9_WebsiteGiaySneaker.Models.SanPham>
+
+@{
+    ViewBag.Title = "Color";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<ul>
+    @foreach (var item in Model.GroupBy(s => s.MauSac).Select(g => g.First()))
+    {
+        <li>
+            <a href="@Url.Action("SanPhamTheoMau","SanPham", new {@mau=item.MauSac })" style="text-transform:uppercase; text-decoration:none;">@item.MauSac</a>
+        </li>
+    }
+</ul>

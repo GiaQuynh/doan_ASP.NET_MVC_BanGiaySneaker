@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<center><h2>HELLO @if (Session["user"] != null)
+                    {
+                        var user = (Nhom9_WebsiteGiaySneaker.Models.NhanVien)Session["user"];
+                        <a href="@Url.Action("ChiTietNhanVien", "Account_Admin", new { @id = user.MaNV })" class="nav-link">@user.HoTenNV</a>
+                    }  </h2></center>
+
+

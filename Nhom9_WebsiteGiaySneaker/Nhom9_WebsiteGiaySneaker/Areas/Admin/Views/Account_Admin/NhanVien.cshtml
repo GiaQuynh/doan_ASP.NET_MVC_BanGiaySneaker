@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Nhom9_WebsiteGiaySneaker.Models.NhanVien>
+
+@{
+    ViewBag.Title = "DANH SÁCH NHÂN VIÊN";
+}
+
+@functions{
+    public static string Truncate(string value, int maxLength)
+    {
+        if (string.IsNullOrEmpty(value)) return value;
+        return value.Length <= maxLength ? value : value.Substring(0, maxLength) + "...";
+    }
+}
+
+<form class="d-flex flex-row align-items-center flex-wrap" action="@Url.Action("NhanVien", "Account_Admin")" method="get">
+    <label for="search" class="mx-2 my-1">Search</label>
+    <input type="search"
+           class="form-control w-auto"
+           id="search"
+           name="search"
+           value="@ViewBag.Search"
+           placeholder="Search" />
+    <button type="submit" class="btn btn-primary mx-2">GO</button>
+</form>
+    @Html.ActionLink("Tạo nhân viên mới", "TaoNhanVien", null, new { @class = "btn btn-primary" })
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HoTenNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgaySinhNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioiTinhNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DienThoaiNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaiKhoanNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatKhauNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChiNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChucVuNC)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTenNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinhNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioiTinhNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DienThoaiNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaiKhoanNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatKhauNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChiNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChucVuNC)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "SuaNhanVien", new { id = item.MaNV }) |
+            @Html.ActionLink("Details", "ChiTietNhanVien", new { id = item.MaNV }) |
+            @Html.ActionLink("Delete", "XoaNhanVien", new { id = item.MaNV })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,89 @@
+﻿@model Nhom9_WebsiteGiaySneaker.Models.SanPham
+@{
+    ViewBag.Title = "TaoSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TaoSanPham</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SanPham</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.MaSP, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MaSP)
+                    @Html.ValidationMessageFor(model => model.MaSP)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenSP, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenSP)
+                @Html.ValidationMessageFor(model => model.TenSP)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnhSP, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AnhSP)
+                @Html.ValidationMessageFor(model => model.AnhSP)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GiaBan, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GiaBan)
+                @Html.ValidationMessageFor(model => model.GiaBan)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MauSac, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MauSac)
+                @Html.ValidationMessageFor(model => model.MauSac)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoTa, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MoTa)
+                @Html.ValidationMessageFor(model => model.MoTa)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaBrand, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaBrand)
+                @Html.ValidationMessageFor(model => model.MaBrand)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "SanPhamm")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

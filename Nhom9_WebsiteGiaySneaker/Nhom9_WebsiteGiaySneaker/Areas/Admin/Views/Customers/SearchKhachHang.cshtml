@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Nhom9_WebsiteGiaySneaker.Models.KhachHang>
+
+@{
+    ViewBag.Title = "SearchKhachHang";
+}
+
+@functions{
+    public static string Truncate(string value, int maxLength)
+    {
+        if (string.IsNullOrEmpty(value)) return value;
+        return value.Length <= maxLength ? value : value.Substring(0, maxLength) + "...";
+    }
+}
+
+<div class="d-flex flex-row align-items-center flex-wrap">
+    <form class="form-inline" action="@Url.Action("Customers", "Customers")" method="get">
+        <div class="form-group mx-2 my-1">
+            <label for="search">Search</label>
+            <input type="search"
+                   class="form-control"
+                   id="search"
+                   name="search"
+                   value="@ViewBag.Search"
+                   placeholder="Search" />
+        </div>
+        <button type="submit" class="btn btn-primary mx-2">GO</button>
+    </form>
+</div>
+
+<h2>Kết quả tìm kiếm</h2>
+
+<p>
+    @Html.ActionLink("Tạo khách hàng mới", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Họ tên</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+            <th>Điện thoại</th>
+            <th>Tài khoản</th>
+            <th>Mật khẩu</th>
+            <th>Email</th>
+            <th>Địa chỉ</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgaySinh)</td>
+                <td>@Html.DisplayFor(modelItem => item.GioiTinh)</td>
+                <td>@Html.DisplayFor(modelItem => item.DienThoai)</td>
+                <td>@Html.DisplayFor(modelItem => item.TaiKhoan)</td>
+                <td>@Html.DisplayFor(modelItem => item.MatKhau)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
+                <td>
+                    @Html.ActionLink("Chỉnh sửa", "SuaKhachHang", new { id = item.MaKH }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Chi tiết", "ChiTietKhachHang", new { id = item.MaKH }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Xóa", "XoaKhachHang", new { id = item.MaKH }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

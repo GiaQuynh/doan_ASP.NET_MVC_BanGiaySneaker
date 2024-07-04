@@ -1,0 +1,110 @@
+﻿@model Nhom9_WebsiteGiaySneaker.Models.DangNhap
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<style>
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .error-message {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+<meta name="viewport" content="width=device-width" />
+<title>Register</title>
+
+<link rel="stylesheet" href="/Assets/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="/Assets/css/animate.css">
+
+<link rel="stylesheet" href="/Assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/Assets/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="/Assets/css/magnific-popup.css">
+
+<link rel="stylesheet" href="/Assets/css/aos.css">
+
+<link rel="stylesheet" href="/Assets/css/ionicons.min.css">
+
+<link rel="stylesheet" href="/Assets/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/Assets/css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="/Assets/css/flaticon.css">
+<link rel="stylesheet" href="/Assets/css/icomoon.css">
+<link rel="stylesheet" href="/Assets/css/style.css">
+
+<h2 class="center">Sign In</h2>
+<div class="center form-group">
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+
+    @using (Html.BeginForm("LoginAD", "Account_Admin", FormMethod.Post, new { id = "loginForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.TaiKhoan)
+            @Html.TextBoxFor(m => m.TaiKhoan, new { @class = "form-control" })
+            <span class="error-message">
+                @Html.ValidationMessageFor(m => m.TaiKhoan)
+            </span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MatKhau)
+            @Html.PasswordFor(m => m.MatKhau, new { @class = "form-control" })
+            <span class="error-message">
+                @Html.ValidationMessageFor(m => m.MatKhau)
+            </span>
+        </div>
+        <div class="center">
+            <div class="form-group">
+                <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <input type="button" onclick="redirectToRegister()" value="Đăng ký" class="btn btn-secondary">
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').submit(function (event) {
+                event.preventDefault();
+
+                var username = $('#TaiKhoan').val();
+                var password = $('#MatKhau').val();
+
+                $.ajax({
+                    url: '/Admin/Account_Admin/LoginAD',
+                    method: 'POST',
+                    data: {
+                        TaiKhoan: username,
+                        MatKhau: password
+                    },
+                    success: function (response) {
+                        $('#successMessage').text('Đăng nhập thành công!');
+                        // Do any other necessary actions upon successful login
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors
+                    }
+                });
+            });
+        });
+
+        function redirectToRegister() {
+            window.location.href = "Register";
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.13/jquery.validate.unobtrusive.min.js"></script>
+}

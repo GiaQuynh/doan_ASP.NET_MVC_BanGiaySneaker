@@ -1,0 +1,48 @@
+﻿@model Nhom9_WebsiteGiaySneaker.Models.NhanVien
+
+@{
+    ViewBag.Title = "ChiTietNhanVien";
+}
+
+<h2>Chi tiết nhân viên</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin nhân viên</h4>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-sm-3">Họ tên</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.HoTenNV)</dd>
+
+            <dt class="col-sm-3">Ngày sinh</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.NgaySinhNV)</dd>
+
+            <dt class="col-sm-3">Giới tính</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.GioiTinhNV)</dd>
+
+            <dt class="col-sm-3">Điện thoại</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.DienThoaiNV)</dd>
+
+            <dt class="col-sm-3">Tài khoản</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.TaiKhoanNV)</dd>
+
+            <dt class="col-sm-3">Mật khẩu</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MatKhauNV)</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.EmailNV)</dd>
+
+            <dt class="col-sm-3">Địa chỉ</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.DiaChiNV)</dd>
+
+            <dt class="col-sm-3">Chức vụ</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.ChucVuNC)</dd>
+        </dl>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Chỉnh sửa", "SuaNhanVien", new { id = Model.MaNV }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to List", "NhanVien")
+</p>

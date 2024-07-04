@@ -1,0 +1,166 @@
+﻿@model IEnumerable<Nhom9_WebsiteGiaySneaker.Models.SanPham>
+
+@{
+    ViewBag.Title = "SanPhamm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@functions{
+    public static string Truncate(string value, int maxLength)
+    {
+        if (string.IsNullOrEmpty(value)) return value;
+        return value.Length <= maxLength ? value : value.Substring(0, maxLength) + "...";
+    }
+}
+
+<form class="d-flex flex-row align-items-center flex-wrap" action="@Url.Action("SanPhamm", "Products")" method="get">
+    <label for="search" class="mx-2 my-1">Search</label>
+    <input type="search"
+           class="form-control w-auto"
+           id="search"
+           name="search"
+           value="@ViewBag.Search"
+           placeholder="Search" />
+    <button type="submit" class="btn btn-primary mx-2">GO</button>
+</form>
+
+<p>
+    @Html.ActionLink("Create New", "TaoSanPham")
+</p>
+
+@{
+    string iconClass = "";
+    if (ViewBag.IconClass == "fa-sort-desc")
+    {
+        iconClass = "fa-sort-asc";
+    }
+    else
+    {
+        iconClass = "fa-sort-desc";
+    }
+}
+<table class="table">
+    <tr>
+        <td>
+            <a href="~/Admin/Products/SanPhamm?SortColumn=MaSP&IconClass=@iconClass&page=1">Mã Sản Phẩm</a>
+            @if (ViewBag.SortColumn == "MaSP")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </td>
+        <th>
+            <a href="~/Admin/Products/SanPhamm?SortColumn=TenSP&IconClass=@iconClass&page=1">Tên Sản Phẩm</a>
+            @if (ViewBag.SortColumn == "TenSP")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </th>
+        <th>
+            Ảnh Sản Phẩm
+        </th>
+        <th>
+            <a href="~/Admin/Products/SanPhamm?SortColumn=GiaBan&IconClass=@iconClass&page=1">Giá Bán</a>
+            @if (ViewBag.SortColumn == "GiaBan")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </th>
+        <th>
+            <a href="~/Admin/Products/SanPhamm?SortColumn=MauSac&IconClass=@iconClass&page=1">Màu Sắc</a>
+            @if (ViewBag.SortColumn == "MauSac")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </th>
+        <th>
+            Mô Tả
+        </th>
+        <th>
+            <a href="~/Admin/Products/SanPhamm?SortColumn=Brand&IconClass=@iconClass&page=1">Thương Hiệu</a>
+            @if (ViewBag.SortColumn == "Brand")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                <img src="~/Assets/AnhSP/@Html.DisplayFor(modelItem => item.AnhSP)" style="width:50px; height:50px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MauSac)
+            </td>
+            <td>
+                @Html.Raw(Truncate(Convert.ToString(Html.DisplayFor(modelItem => item.MoTa)), 30))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.TenBrand)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "SuaSanPham", new { id = item.MaSP }) |
+                @Html.ActionLink("Details", "ChiTietSanPham", new { id = item.MaSP }) |
+                @Html.ActionLink("Delete", "XoaSanPham", new { id = item.MaSP })
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="9">
+            @{
+                int PrevPage = ViewBag.Page - 1;
+                if (PrevPage <= 0)
+                {
+                    PrevPage = 1;
+                }
+                int NextPage = ViewBag.Page + 1;
+                if (NextPage > ViewBag.NoOfPages)
+                {
+                    NextPage = ViewBag.NoOfPages;
+                }
+            }
+            <ul class="pagination justify-content-center">
+                <li class="page-item active">
+                    <a class="page-link" href="~/Admin/Products/SanPhamm?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&page=@PrevPage">
+                        PrevPage
+                    </a>
+                </li>
+                @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                {
+                    if (i + 1 == ViewBag.Page)
+                    {
+                        <li class="page-item active">
+                            <a class="page-link" href="~/Admin/Products/SanPhamm?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&page=@(i+1)">
+                                @(i + 1)
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="~/Admin/Products/SanPhamm?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&page=@(i+1)">
+                                @(i + 1)
+                            </a>
+                        </li>
+                    }
+                }
+                <li class="page-item">
+                    <a class="page-link" href="~/Admin/Products/SanPhamm?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&page=@NextPage">
+                        NextPage
+                    </a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,41 @@
+﻿@model Nhom9_WebsiteGiaySneaker.Models.SanPham
+@{
+    ViewBag.Title = "ChiTietSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin sản phẩm</h4>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-sm-3">Tên sản phẩm</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.TenSP)</dd>
+
+            <dt class="col-sm-3">Ảnh sản phẩm</dt>
+            <dd class="col-sm-9">
+                <img src="~/Assets/AnhSP/@Html.DisplayFor(model => model.AnhSP)" style="width:50px; height:50px" />
+            </dd>
+
+            <dt class="col-sm-3">Giá bán</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.GiaBan)</dd>
+
+            <dt class="col-sm-3">Màu sắc</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MauSac)</dd>
+
+            <dt class="col-sm-3">Mô tả</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MoTa)</dd>
+
+            <dt class="col-sm-3">Thương hiệu</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Brand.TenBrand)</dd>
+        </dl>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "SuaSanPham", new { id = Model.MaSP }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to List", "SanPhamm")
+</p>

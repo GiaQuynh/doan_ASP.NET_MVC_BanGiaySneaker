@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h1>Weather App</h1>
+
+    <div id="weather-info"></div>
+
+    <script>
+        const apiKey = '3c5f8767d616bb880d4f1ad7bd8ced6c';
+        const city = 'London';
+
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+        $.ajax({
+            url: url,
+            method: "GET",
+            success: function (data) {
+                // Xử lý dữ liệu thời tiết ở đây
+                displayWeather(data);
+            },
+            error: function (error) {
+
+                console.log('Error:', error);
+            }
+        });
+        //  function displayWeather(data) {
+        //      const weatherInfo = document.getElementById('weather-info');
+
+        //      // Hiển thị thông tin thời tiết
+        //      const cityName = data.name;
+        //      const temperatureKelvin = data.main.temp;
+        //      const temperatureCelsius = temperatureKelvin - 273.15; // Chuyển đổi từ Kelvin sang Celsius
+        //      const weatherDescription = data.weather[0].description;
+
+        //      const html = `
+        //  <h2>${cityName}</h2>
+        //  <p>Temperature: ${temperatureCelsius.toFixed(1)}°C</p>
+        //  <p>Description: ${weatherDescription}</p>
+        //  <canvas id="chart"></canvas>
+        //`;
+
+        //      weatherInfo.innerHTML = html;
+
+        //      // Tạo mảng dữ liệu cho biểu đồ
+        //      const temperatureData = [
+        //          { x: 'Now', y: temperatureCelsius },
+        //          // Các điểm dữ liệu nhiệt độ khác
+        //      ];
+
+        //      // Vẽ biểu đồ bằng Chart.js
+        //      const ctx = document.getElementById('chart').getContext('2d');
+        //      new Chart(ctx, {
+        //          type: 'line',
+        //          data: {
+        //              datasets: [{
+        //                  label: 'Temperature',
+        //                  data: temperatureData,
+        //                  fill: false,
+        //                  borderColor: 'rgb(75, 192, 192)',
+        //                  tension: 0.1
+        //              }]
+        //          },
+        //          options: {
+        //              // Cấu hình biểu đồ
+        //          }
+        //      });
+        //  }
+        function displayWeather(data) {
+            const weatherInfo = document.getElementById('weather-info');
+
+            // Hiển thị thông tin thời tiết
+            const cityName = data.name;
+            const temperatureKelvin = data.main.temp;
+            const temperatureCelsius = temperatureKelvin - 273.15; // Chuyển đổi từ Kelvin sang Celsius
+            const weatherDescription = data.weather[0].description;
+
+            const html = `
+                <h2>${cityName}</h2>
+                <p>Temperature: ${temperatureCelsius.toFixed(1)}°C</p>
+                <p>Description: ${weatherDescription}</p>
+              `;
+
+            weatherInfo.innerHTML = html;
+        }
+
+    </script>
+    <canvas id="chart"></canvas>
+</body>
+</html>

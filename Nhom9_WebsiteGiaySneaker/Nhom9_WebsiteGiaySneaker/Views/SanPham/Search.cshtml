@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage3.cshtml";
+}
+
+@model IEnumerable<Nhom9_WebsiteGiaySneaker.Models.SanPham>
+@ViewBag.TB
+@foreach (var item in Model)
+{
+    <div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
+        <div class="product d-flex flex-column">
+
+            <a href="#" class="img-prod">
+                <img class="img-fluid" src="@Url.Content("/Assets/AnhSP/"+item.AnhSP)" alt="Colorlib Template" />
+                <div class="overlay"></div>
+            </a>
+            <div class="text py-3 pb-4 px-3">
+                <div class="d-flex">
+                    <div class="cat">
+                        <span>Lifestyle</span>
+                    </div>
+                    <div class="rating">
+                        <p class="text-right mb-0">
+                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                        </p>
+                    </div>
+                </div>
+                <h3 title="@item.TenSP"><a href="#">@item.TenSP</a></h3>
+                <div class="pricing">
+                    <p class="price" title="@item.GiaBan"><span>@item.GiaBan</span></p>
+                </div>
+                @*<a href="@Url.Action("ChiTietSanPhamView", new { @id=item.MaSP })">Xem chi tiet</a>*@
+                <p class="bottom-area d-flex px-3">
+                    <a href="@Url.Action("AddGioHang", "GioHang", new { @ms = item.MaSP, @URL = Request.Url.ToString() })" class="add-to-cart text-center py-2 mr-1">
+                        <span>Add to cart <i class="ion-ios-add ml-1"></i></span>
+                    </a>
+                    @*<a href="@Url.Action("AddGioHang", "GioHang", new { @ms = item.MaSP, @URL = Request.Url.ToString() })" class="buy-now text-center py-2">
+                            Buy now<span><i class="ion-ios-cart ml-1"></i></span>
+                        </a>*@
+                    <a href="@Url.Action("ChiTietSanPhamView", new { @id = item.MaSP })" class="buy-now text-center py-2">
+                        Detail<span><i class="ion-ios-cart ml-1"></i></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Index1";
+    Layout = "~/Views/Shared/_LayoutPage4.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f6f5f7;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 200vh;
+            margin: -20px 0 50px;
+        }
+
+        h1 {
+            font-weight: bold;
+            margin: 0;
+            color: red;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 100;
+            line-height: 20px;
+            letter-spacing: 0.5px;
+            margin: 20px 0 30px;
+        }
+
+        .empty-cart-page {
+            max-width: 500px;
+            text-align: center;
+            padding: 60px 30px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.2s linear;
+        }
+
+        .empty-cart-page img {
+            max-width: 100px;
+        }
+
+        .empty-cart-page h1 {
+            font-size: 28px;
+        }
+
+        .empty-cart-page h3 {
+            font-size: 16px;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .empty-cart-page .btn {
+            display: inline-block;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            padding: 12px 24px;
+            border-radius: 5px;
+            transition: all 0.2s linear;
+            cursor: pointer;
+            text-decoration: none;
+            color: #f6f5f7;
+            background-color: #5cb85c;
+        }
+
+        .empty-cart-page .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .empty-cart-page .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-wrap hero-bread" style="background-image: url('/Assets/images/bg_6.jpg');">
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <p class="breadcrumbs"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Cart</span></p>
+                    <h1 class="mb-0 bread">My Wishlist</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <center>
+        <div class="empty-cart-page">
+            <h1>THÔNG BÁO</h1>
+            <h3>KHÔNG CÓ SẢN PHẨM NÀO TRONG GIỎ HÀNG</h3>
+            <a href="@Url.Action("Index","Home")" class=" btn">Quay Về Trang Chủ <=</a>
+        </div>
+    </center>
+
+</body>
+</html>

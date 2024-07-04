@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Nhom9_WebsiteGiaySneaker.Models.KhachHang>
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+@functions{
+    public static string Truncate(string value, int maxLength)
+    {
+        if (string.IsNullOrEmpty(value)) return value;
+        return value.Length <= maxLength ? value : value.Substring(0, maxLength) + "...";
+    }
+}
+
+<form class="d-flex flex-row align-items-center flex-wrap" action="@Url.Action("Customers", "Customers")" method="get">
+    <label for="search" class="mx-2 my-1">Search</label>
+    <input type="search"
+           class="form-control w-auto"
+           id="search"
+           name="search"
+           value="@ViewBag.Search"
+           placeholder="Search" />
+    <button type="submit" class="btn btn-primary mx-2">GO</button>
+</form>
+
+<p>
+    @Html.ActionLink("Create New", "TaoKhachHang")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaiKhoan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioiTinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaiKhoan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatKhau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "SuaKhachHang", new { id = item.MaKH }) |
+            @Html.ActionLink("Details", "ChiTietKhachHang", new { id = item.MaKH }) |
+            @Html.ActionLink("Delete", "XoaKhachHang", new { id = item.MaKH })
+        </td>
+    </tr>
+}
+
+</table>

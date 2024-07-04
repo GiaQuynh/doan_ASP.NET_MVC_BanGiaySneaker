@@ -1,0 +1,62 @@
+﻿@model Nhom9_WebsiteGiaySneaker.Models.KhachHang
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 ftco-animate">
+                <form action="#" class="billing-form">
+                    <h3 class="mb-4 billing-heading">Profile</h3>
+                    <div class="row align-items-end">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="firstname">Full Name</label>
+                                <div class="form-control">@Html.DisplayFor(model => model.HoTen)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstname">Birth</label>
+                                <div class="form-control">@Html.DisplayFor(model => model.NgaySinh)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstname">Gender</label>
+                                <div class="form-control">@Html.DisplayFor(model => model.GioiTinh)</div>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="streetaddress">Street Address</label>
+                                <div class="form-control">@Html.DisplayFor(model => model.DiaChi)</div>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <div class="form-control">@Html.DisplayFor(model => model.DienThoai)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="emailaddress">Email Address</label>
+                                <div class ="form-control">@Html.DisplayFor(model => model.Email)</div>
+                            </div>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Edit", "EditProfile", new { @id = Model.MaKH }) |
+                            @Html.ActionLink("Back to List", "Index", "Home")
+                        </p>
+                    </div>
+                </form><!-- END -->
+            </div> <!-- .col-md-8 -->
+        </div>
+    </div>
+</section> <!-- .section -->
